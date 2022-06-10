@@ -1,0 +1,73 @@
+class NhanVien
+{
+public:
+	enum LOAI {
+		vanphong, sanxuat, nhanvien
+	};
+protected:
+	string hoten;
+	CDate ngaysinh;
+	long luong = 0;
+public:
+	LOAI loai = nhanvien;
+	NhanVien();
+	void nhap();
+	void xuat();
+	virtual ~NhanVien();
+};
+NhanVien::NhanVien()
+{
+	loai = nhanvien;
+	luong = 0;
+}
+/********************************************/
+void CTy::nhapDS()
+{
+	cout << "Nhap so nhan vien: ";
+	cin >> num;
+	nv = new NhanVien * [num];
+	for (int i = 0; i < num; i++){
+		int nvtype = 0;
+		cout << "Nhap loai nhan vien (vanphong = 0, sanxuat = 1): ";
+		cin >> nvtype;
+		switch (nvtype) {
+		case NhanVien::sanxuat:
+			nv[i] = new NVSX;
+			((NVSX*)nv[i])->nhap();
+			cout << endl;
+			break;
+		case NhanVien::vanphong:
+			nv[i] = new NVVP;
+			((NVVP*)nv[i])->nhap();
+			cout << endl;
+			break;
+		default:
+			cout << "Invalid type";
+			break;
+		}
+	}
+}
+/**************************************/
+NhanVien CTy::timNVMaxSal()
+{
+	NhanVien *a = new NhanVien;
+	long long salMax = 0;
+	for (int i = 0; i < num; i++)
+	{
+		if (nv[i]->loai == NhanVien::vanphong)
+		{
+			if (((NVVP*)nv[i])->tinhluong() > salMax)
+			{
+				salMax = ((NVVP*)nv[i])->tinhluong();
+				a = (NVVP*)nv[i];
+			}
+		}
+		else if (nv[i]->loai == NhanVien::sanxuat)
+			if (((NVSX*)nv[i])->tinhluong() > salMax)
+			{
+				salMax = ((NVSX*)nv[i])->tinhluong();
+				a = (NVVP*)nv[i];
+			}
+	}
+	return *a;
+}

@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+class Phanso
+{
+private:
+    int tuso, mauso;
+ 
+public:
+    Phanso()
+    {
+        tuso = 0;
+        mauso = 1;
+    }
+ 
+    ~Phanso()
+    {
+        tuso = 0;
+        mauso = 1;
+    }
+//-----------------------------------------------------------------//
+    void set()
+    {
+        cout << "Nhap Tu So: "; cin >> this->tuso;
+        cout << "Nhap Mau So: "; cin >> this-> mauso;
+    }
+ 
+    void get()
+    {
+        cout << this->tuso << "/" << this->mauso << endl;
+    }
+//-----------------------------------------------------------------//
+    Phanso Cong(Phanso ps1, Phanso ps2)
+    {
+        Phanso ps3;
+        ps3.tuso = ps1.tuso * ps2.mauso + ps1.mauso * ps2.tuso;
+        ps3.mauso = ps1.mauso * ps2.mauso;
+        return ps3;
+    }
+    Phanso Tru(Phanso ps1, Phanso ps2)
+    {
+        Phanso ps3;
+        ps3.tuso = ps1.tuso * ps2.mauso - ps1.mauso * ps2.tuso;
+        ps3.mauso = ps1.mauso * ps2.mauso;
+        return ps3;
+    }
+    Phanso Nhan(Phanso ps1, Phanso ps2)
+    {
+        Phanso ps3;
+        ps3.tuso = ps1.tuso * ps2.tuso;
+        ps3.mauso = ps1.mauso * ps2.mauso;
+        return ps3;
+    }
+    Phanso Chia(Phanso ps1, Phanso ps2)
+    {
+        Phanso ps3;
+        ps3.tuso = ps1.tuso * ps2.mauso;
+        ps3.mauso = ps1.mauso * ps2.tuso;
+        return ps3;
+    }
+};
+ 
+int main()
+{
+    Phanso ps1, ps2, ps3;
+    ps1.set(); ps2.set();
+ 
+    ps3 = ps3.Cong(ps1, ps2); ps3.get();
+    ps3 = ps3.Tru(ps1, ps2); ps3.get();
+    ps3 = ps3.Nhan(ps1, ps2); ps3.get();
+    ps3 = ps3.Chia(ps1, ps2); ps3.get();
+ 
+    return 0;
+}
